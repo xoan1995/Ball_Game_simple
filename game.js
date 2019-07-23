@@ -1,5 +1,4 @@
 let canvas = document.getElementById('game');
-
 let context = canvas.getContext('2d');
 function drawScore(){
     context.beginPath();
@@ -9,8 +8,21 @@ function drawScore(){
     context.closePath();
 }
 
-function drawBackGround(){
+function drawBackGroundPlay(){
     let img=document.getElementById("img");
+    context.beginPath();
+    context.drawImage(img,0,0,canvas.width,canvas.height);
+    context.closePath();
+
+}
+function drawBackGroundLose(){
+    let img=document.getElementById("imglose");
+    context.beginPath();
+    context.drawImage(img,0,0,canvas.width,canvas.height);
+    context.closePath();
+}
+function drawBackGroundWin(){
+    let img=document.getElementById("imgwin");
     context.beginPath();
     context.drawImage(img,0,0,canvas.width,canvas.height);
     context.closePath();
@@ -24,7 +36,7 @@ let ball = {
     radius: 10,
 };
 let thanhChan = {
-    width: 300,
+    width: 150,
     height: 10,
     x: 100,
     y: canvas.height - 10,
@@ -40,7 +52,7 @@ let luuGiaTriCacVienGach = {
     margin: 0.2,
     width: 50,
     height: 20,
-    totalRow: 17,
+    totalRow: 12,
     totalCol: 20
 };
 let array = [];
@@ -88,15 +100,15 @@ function veNhieuGach() {
 function drawBall() {
     context.beginPath();
     context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    context.fillStyle = "green";
+    context.fillStyle = "white";
     context.fill();
     context.closePath();
 }
 
-
 function veThanhChan() {
     context.beginPath();
     context.rect(thanhChan.x, thanhChan.y, thanhChan.width, thanhChan.height);
+    context.fillStyle="blue";
     context.fill();
     context.closePath();
 }
@@ -124,12 +136,15 @@ function bongVaChamGach() {
             if (ball.x >= b.x && ball.x <= b.x + luuGiaTriCacVienGach.width &&
                 ball.y + ball.radius >= b.y && ball.y - ball.radius <= b.y + luuGiaTriCacVienGach.height) {
                 ball.dy = -ball.dy;
-                ball.dy+=0.03;
+                ball.dy+=0.01;
+                luuGiaTriCacVienGach.height+=2;
+                console.log(luuGiaTriCacVienGach.totalRow);
                 console.log(ball.dy);
                 console.log(ball.dx);
                 b.isBroken = true;
                 let sound = new Audio();
                 sound.src = "bricks-drop.mp3";
+                sound.type="audio/mp3";
                 sound.volume=1;
                 sound.play();
                 myScore++;
@@ -173,20 +188,23 @@ function updateThanhChan() {
 }
 
 function checkGameOver() {
-    if (ball.y > canvas.height - ball.radius) {
+    if (ball.y > canvas.height - ball.radius || luuGiaTriCacVienGach.width*luuGiaTriCacVienGach.totalRow===canvas.height) {
+
         gameOver = true;
     }
+
 }
 
 function showGameOver() {
-    alert("GAME OVER");
+
+    drawBackGroundLose();
 }
 function showWin() {
-    if(myScore>=630){
+    if(myScore>=240){
         alert("YOU WIN");
     }
 }
-drawBackGround();
+drawBackGroundPlay();
 veNhieuGach();
 drawBall();
 veThanhChan();
@@ -195,7 +213,7 @@ function draw() {
     if (!gameOver) {
         context.clearRect(0, 0, canvas.width, canvas.height);
         //ve bong
-        drawBackGround();
+        drawBackGroundPlay();
         veNhieuGach();
         drawBall();
         veThanhChan();
