@@ -5,10 +5,19 @@
     <title>Game dap gach</title>
 </head>
 <body>
-<img id="img" src="cunghoangdao.png" width="650" height="800" style="display: none" alt="">
+<iframe src="silence.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+<audio id="player"volume="0.1" autoplay loop>
+    <source src="Windfall.mp3"  type="audio/mp3">
+</audio>
+<img id="img" src="cunghoangdao.png" width="1000" height="563" style="display: none" alt="">
 
-<canvas id="game" width="650" height="550" style=" border:1px solid #8587c3;"></canvas>
+<canvas id="game" width="1000" height="563" style=" border:1px solid #8587c3;"></canvas><br>
+<button onmousedown="moveleft()" onmouseup="clearMoveLeft()">LEFT</button>
+<button onmousedown="moveright()" onmouseup="clearMoveRight()">RIGHT</button>
 <button onclick="draw()">START</button>
 <script src="game.js"></script>
+<!--<button onmousedown="moveleft()" onmouseup="clearmove()" ontouchstart="moveleft()">LEFT</button>-->
+<!--<button onmousedown="moveright()" onmouseup="clearmove()" ontouchstart="moveright()">RIGHT</button><br><br>-->
+
 </body>
 </html>

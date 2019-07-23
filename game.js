@@ -37,11 +37,11 @@ let gameOver = false;
 let luuGiaTriCacVienGach = {
     offsetX: 1,
     offsetY: 1,
-    margin: 0.3,
-    width: 30.5,
-    height: 10,
-    totalRow: 30,//30
-    totalCol: 21//21
+    margin: 0.2,
+    width: 50,
+    height: 20,
+    totalRow: 17,
+    totalCol: 20
 };
 let array = [];
 for (let i = 0; i < luuGiaTriCacVienGach.totalRow; i++) {
@@ -126,8 +126,11 @@ function bongVaChamGach() {
                 ball.dy = -ball.dy;
                 ball.dy+1;
                 b.isBroken = true;
+                let sound = new Audio();
+                sound.src = "bricks-drop.mp3";
+                sound.volume=1;
+                sound.play();
                 myScore++;
-                console.log(myScore);
             }
         }
     });
@@ -137,7 +140,22 @@ function toaDoBong() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 }
-
+// function clearmove() {
+//   thanhChan.speedX = 0;
+//     thanhChan.speedY = 0;
+// }
+function moveleft() {
+        thanhChan.diChuyenSangTrai = true;
+}
+function clearMoveLeft() {
+    thanhChan.diChuyenSangTrai = false;
+}
+function moveright() {
+    thanhChan.diChuyenSangPhai = true;
+}
+function clearMoveRight() {
+    thanhChan.diChuyenSangPhai = false;
+}
 function updateThanhChan() {
     if (thanhChan.diChuyenSangTrai) {
         thanhChan.x -= thanhChan.speed;
