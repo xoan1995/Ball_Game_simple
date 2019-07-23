@@ -24,7 +24,7 @@ let ball = {
     radius: 10,
 };
 let thanhChan = {
-    width: 100,
+    width: 300,
     height: 10,
     x: 100,
     y: canvas.height - 10,
@@ -124,7 +124,9 @@ function bongVaChamGach() {
             if (ball.x >= b.x && ball.x <= b.x + luuGiaTriCacVienGach.width &&
                 ball.y + ball.radius >= b.y && ball.y - ball.radius <= b.y + luuGiaTriCacVienGach.height) {
                 ball.dy = -ball.dy;
-                ball.dy+1;
+                ball.dy+=0.03;
+                console.log(ball.dy);
+                console.log(ball.dx);
                 b.isBroken = true;
                 let sound = new Audio();
                 sound.src = "bricks-drop.mp3";
